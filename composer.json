@@ -1,0 +1,21 @@
+{
+    "name": "jack/php-clamscan",
+    "description": "Scan for bad stuff",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jakabadambalazs",
+            "email": "jakabadambalazs@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "^2.6",
+        "symfony/filesystem": "^2.6",
+        "google/apiclient": "^1.1"
+    },
+    "autoload" : {
+      "psr-0" : {
+        "Jack" : "src"
+      }
+    }
+}
