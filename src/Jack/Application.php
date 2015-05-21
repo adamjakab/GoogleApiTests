@@ -10,7 +10,7 @@ use Symfony\Component\Console\Application as BaseApplication;
 
 class Application extends BaseApplication
 {
-	const NAME = 'Jack\' Console Application';
+	const NAME = 'Google API Tests - Console Application';
 	const VERSION = '1.0';
 
 	public function __construct()
