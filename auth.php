@@ -12,16 +12,22 @@ session_start();
 @include_once __DIR__ . '/vendor/autoload.php';
 @include_once __DIR__ . "/vendor/google/apiclient/examples/templates/base.php";
 
-//@todo: load these
-$client_id = '902693345462-3oegm5aa0kp3tprnubtcpneogg23bfhn.apps.googleusercontent.com';
-$client_secret = 'YAGOOJJCVtPoLUvgm-IMrOIS';
-$redirect_uri = 'http://localhost:63342/GoogleApiTests/auth.php';
+$config_file = 'private/gapp.yml';
+$configParser = new \Jack\Configuration\Parser();
+try {
+    $config = $configParser->getConfiguration($config_file);
+} catch (Exception $e) {
+    echo $e->getMessage();
+    exit;
+}
+
+var_dump($config);
 
 $client = new Google_Client();
-$client->setClientId($client_id);
-$client->setClientSecret($client_secret);
-$client->setRedirectUri($redirect_uri);
-$client->setScopes('email');
+$client->setClientId($config['client_id']);
+$client->setClientSecret($config['client_secret']);
+$client->setRedirectUri($config['redirect_uri']);
+$client->setScopes($config['scopes']);
 
 /************************************************
 If we're logging out we just need to clear our
@@ -68,7 +74,7 @@ if ($client->getAccessToken()) {
 }
 
 echo ("User Query - Retrieving An Id Token");
-if (strpos($client_id, "googleusercontent") == false) {
+if (strpos($config['client_id'], "googleusercontent") == false) {
     echo missingClientSecretsWarning();
     exit;
 }

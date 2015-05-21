@@ -18,10 +18,9 @@ class TestCommand extends Command
 	 * Configure command
 	 */
 	protected function configure() {
-		$this->setName("test")
-            ->setDescription("Run some tests")
-            ->setDefinition(
+		$this->setName("test")->setDescription("Run some tests")->setDefinition(
 			[
+				new InputArgument('config_file', InputArgument::REQUIRED, 'The yaml(.yml) configuration file'),
 			]
 		);
 	}
@@ -33,6 +32,7 @@ class TestCommand extends Command
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		parent::_execute($input, $output);
+		$this->checkConfiguration();
 		$this->doit();
 		$this->log("Done");
 	}
@@ -41,4 +41,12 @@ class TestCommand extends Command
 		//
 	}
 
+	/**
+	 * Checks configuration values used by this command
+	 *
+	 * @throws \LogicException
+	 */
+	protected function checkConfiguration() {
+		//
+	}
 }
