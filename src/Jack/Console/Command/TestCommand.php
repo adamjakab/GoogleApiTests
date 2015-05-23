@@ -35,12 +35,25 @@ class TestCommand extends Command
 		parent::_execute($input, $output);
 		$this->checkConfiguration();
 		$this->doit();
-		$this->log("Done");
+		$this->log("\nDone");
 	}
 
 	private function doit() {
         $googleAuth = new GoogleAuth($this->config);
-        $googleAuth->getValidAccessToken();
+        $at = json_decode($googleAuth->getAccessToken());
+        $access_token = $at->access_token;
+        //echo "\naccess token: " . $access_token;
+
+        //$url = 'https://www.google.com/m8/feeds/contacts/default/full?alt=json&v=3.0&oauth_token='.$access_token;
+        $url = 'https://www.google.com/m8/feeds/contacts/default/full?max-results=1&alt=json&v=3.0&oauth_token='.$access_token;
+        $url = 'https://www.google.com/m8/feeds/contacts/default/full?max-results=1&alt=atom&v=3.0&oauth_token='.$access_token;
+        $url = 'http://www.google.com/m8/feeds/contacts/default/full/a9eb4b8d78c108?&alt=json&v=3.0&oauth_token='.$access_token;
+
+
+
+
+        $response =  file_get_contents($url);
+        echo $response;
 
 	}
 
