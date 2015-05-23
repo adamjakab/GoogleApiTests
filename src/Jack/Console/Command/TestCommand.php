@@ -1,6 +1,7 @@
 <?php
 namespace Jack\Console\Command;
 
+use Jack\Google\GoogleAuth;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -38,7 +39,9 @@ class TestCommand extends Command
 	}
 
 	private function doit() {
-		//
+        $googleAuth = new GoogleAuth($this->config);
+        $googleAuth->getValidAccessToken();
+
 	}
 
 	/**

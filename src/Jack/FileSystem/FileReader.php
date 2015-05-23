@@ -14,7 +14,8 @@ class FileReader {
 	}
 
 	public function open() {
-		$this->fileResource = fopen($this->path, "r");
+		$res = $this->fileResource = @fopen($this->path, "r");
+        return $res !== false;
 	}
 
 	public function close() {

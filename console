@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 set_time_limit(0);
+defined('ROOT_PATH') || define('ROOT_PATH', __DIR__);
 @include_once __DIR__ . '/vendor/autoload.php';
 use Jack\Application;
 $app = new Application('GoogleApiTest Application', '0.1.0');

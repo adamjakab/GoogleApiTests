@@ -50,20 +50,7 @@ class Command extends ConsoleCommand
         }
         $this->config = $config["config"];
 
-        //Temporary path checks
-        if (!isset($this->config["temporary_path"])) {
-            throw new \LogicException("Missing 'temporary_path' configuration!");
-        } else {
-            $fs = new Filesystem();
-            if (!$fs->exists($this->config["temporary_path"])) {
-                $fs->mkdir($this->config["temporary_path"]);
-            }
-            $temporary_path = realpath($this->config["temporary_path"]);
-            if (!$temporary_path) {
-                throw new \LogicException("Unable to create 'temporary_path'(" . $this->config["temporary_path"] . ")!");
-            }
-            $this->config["temporary_path"] = $temporary_path;
-        }
+        //do some other checks
 
     }
 
