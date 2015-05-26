@@ -26,6 +26,16 @@ class GoogleAuth
         $this->client->setClientSecret($config['client_secret']);
         $this->client->setRedirectUri($config['redirect_uri']);
         $this->client->setScopes($config['auth_scopes']);
+        //
+        $this->client->setClassConfig('Google_Logger_File', 'file', ROOT_PATH . '/private/log.txt');
+        $this->client->setClassConfig('Google_Logger_File', 'mode', '0640');
+        $logger = new \Google_Logger_File($this->client);
+        $this->client->setLogger($logger);
+        //
+//        $this->client->setClassConfig('Google_Cache_File', 'directory', ROOT_PATH . '/private/cache');
+//        $cache = new \Google_Cache_File($this->client);
+//        $this->client->setCache($cache);
+        //
         $this->setValidAccessToken();
     }
 
